@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Step Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            width: 300px;
+        }
+        .form-group {
+            margin-bottom: 10px;
+        }
+        input {
+            padding: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background: white;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+        }
+        .delete-btn {
+            color: red;
+            float: right;
+            text-decoration: none;
+        }
+        .total {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Step Tracker</h1>
+
+    <form action="/add" method="POST">
+        <div class="form-group">
+            <label for="steps">Steps:</label>
+            <input type="number" name="steps" id="steps" required>
+        </div>
+        <div class="form-group">
+            <label for="date">Date:</label>
+            <input type="date" name="date" id="date" required>
+        </div>
+        <button type="submit">Add/Update</button>
+    </form>
+
+    <h3>Records:</h3>
+    <ul>
+        {% for record in records %}
+        <li>
+            {{ record.date }}: {{ record.steps }} steps
+            <a href="/delete/{{ record.id }}" class="delete-btn">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <div class="total">Total steps: {{ total_steps }}</div>
+</body>
+</html>
